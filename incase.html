@@ -1,0 +1,27 @@
+<!-- Some polyfills to ensure we have promises. -->
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<!-- Split SDK loaded via CDN. -->
+<script src="https://cdn.split.io/sdk/split-10.15.7.js"></script>
+
+<script type="text/javascript">
+var factory = splitio({
+	core: {
+		authorizationKey: 't26gianvtj84delv1jhkng4q7jjah4b4q78u',
+		key: 'user_id' // unique identifier for your user
+	}
+});
+
+var client = factory.client();
+
+client.on(client.Event.SDK_READY, function() {
+	var treatment = client.getTreatment('double_column');
+	if (treatment === 'on') {
+			document.querySelector("body > main").className = 'double-column';
+			console.log("on");
+	}   else   if (treatment === 'off') {
+		// insert off code here
+		console.log("Off");
+		document.querySelector("body > main").className = 'single-column';
+	}
+});
+</script>
